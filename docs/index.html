@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agents & Developers 2025</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Librerías -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+</head>
+<body>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">DEV × AI AGENTS '25</div>
+  <div class="nav-links">
+    <a href="#Adopción">Adopción</a>
+    <a href="#Satisfacción">Satisfacción y empleo</a>
+    <a href="#Herramientas">Herramientas</a>
+    <a href="#Salarios">Salarios</a>
+    <a href="#Habilidades">Habilidades</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Stack Overflow Developer Survey 2025 · Análisis</div>
+  <h1>¿Están los <em>AI Agents</em> transformando el trabajo del desarrollador?</h1>
+  <p class="hero-sub">Un análisis visual de la adopción, impacto y futuro percibido de los agentes de IA en la comunidad global de desarrollo de software.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-n">49.191</span>
+      <span class="hero-stat-l">desarrolladores encuestados</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n">172</span>
+      <span class="hero-stat-l">variables analizadas</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n">185+</span>
+      <span class="hero-stat-l">países representados</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n">2025</span>
+      <span class="hero-stat-l">primera edición con AI Agents</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    SCROLL PARA EXPLORAR
+  </div>
+</div>
+
+<!-- P1: Adopción --> 
+<section id="Adopción">
+    <div class="section-header">
+        <span class="section-num">P1.</span>
+        <h2>Adopción de <span>AI Agents</span></h2>
+    </div>
+    <p class="section-question">¿En qué medida han adoptado los desarrolladores los AI Agents en 2025, y cómo varía esta adopción por país, experiencia, tipo de rol e industria?</p>    
+
+    <div class="grid-2" style="margin-bottom:1.5rem">
+        <div class="card">
+            <div class="card-title">Distribución global de uso</div>
+            <div id="donut-adoption" style="display:flex;gap:1.5rem;align-items:center"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:1rem">
+            <div class="card-title">Adopción de AI Agents por franja de edad</div>
+            <div id="bar-age"></div>
+        </div>
+    </div>
+    
+    <div class="insight">
+        <strong>Insight:</strong> La adopción no está liderada por los desarrolladores más jóvenes - el pico se da en la franja <strong>35-44 años</strong> (33.1%), mientras que los menores de 25 años muestran una adopción inferior (29.1%). Los perfiles senior de 55+ años son los que más resistencia plantean al uso de esta tecnología (20-24%).
+    </div> 
+
+    <div class="card" style="margin-bottom:1rem">
+        <div class="card-title">% de desarrolladores que utilizan AI Agents por país</div>
+        <div id="map-container">
+            <svg id="world-map" width="100%" height="100%"></svg>
+        </div>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem;">
+        <div class="card">
+            <div class="card-title">Adopción por tipo de rol/industria (Top 15)</div>
+            <div id="bar-devtype"></div>
+        </div>
+    </div>
+
+    <div class="insight">
+        <strong>Insight:</strong> La adopción de AI Agents está liderada por perfiles especializados en IA 
+        (55.6%) e ingenieros AI/ML (49.9%), pero sorprende que <strong>founders y C-suite (45-46%)</strong> 
+        superen ampliamente a data scientists (31.2%) y developers back-end (30.6%) - los perfiles 
+        tradicionalmente más técnicos. Esto sugiere que la adopción está impulsada tanto por la 
+        <em>visión estratégica</em> desde arriba como por la especialización técnica, mientras que el 
+        desarrollo generalista muestra mayor resistencia.
+    </div> 
+</section>
+<hr class="section-divider">
+
+<!-- P2: Satisfacción/Percepción  -->
+<section id="Satisfacción">
+    <div class="section-header">
+        <span class="section-num">P2.</span>
+        <h2>Impacto en <span>satisfacción y empleo</span></h2>
+    </div>
+    <p class="section-question">¿Los desarrolladores que usan AI Agents reportan mayor o menor satisfacción laboral? ¿Existe relación entre adopción de IA y percepción de amenaza al empleo (AIThreat) o consideración de cambio de carrera (NewRole)?
+    </p>
+
+    <div class="grid-2" style="margin-bottom:1.5rem">
+    <div class="card">
+        <div class="card-title">¿Sientes que la IA amenaza tu empleo?</div>
+        <div id="donut-aithreat" style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap"></div>
+    </div>
+    <div class="card">
+        <div class="card-title">Consideración de cambio de carrera</div>
+        <div id="bar-newrole"></div>
+    </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Percepción de amenaza laboral según uso de AI Agents</div>
+        <div id="stacked-threat"></div>
+    </div>
+
+    <div class="insight">
+        <strong>Insight:</strong> El <strong>63.6%</strong> de los desarrolladores no percibe la IA como 
+        amenaza directa a su empleo, pero solo el <strong>45.6%</strong> no ha considerado cambiar de 
+        carrera - una brecha significativa que sugiere que la reconversión profesional responde a factores 
+        más amplios que el miedo a la IA. Preocupa que un <strong>10.8%</strong> ya ha realizado una 
+        transición (8.8% voluntaria, 2% involuntaria), y casi la mitad de los encuestados 
+        <em>(43.6%)</em> ha considerado seriamente un cambio de rumbo profesional.
+    </div>
+
+    <div class="card" style="margin-top:1.5rem">
+        <div class="card-title">¿Qué valoran diferente los usuarios de AI Agents? - Diferencia en ranking de satisfacción laboral</div>
+        <div id="bar-jobsat-diff"></div>
+    </div>
+    
+    <div class="insight">
+        <strong>Insight:</strong> Los usuarios de AI Agents valoran significativamente más la 
+        <strong>autonomía y confianza</strong> (+0.38) y el <strong>control sobre la calidad</strong> 
+        (+0.24) - coherente con un perfil que delega tareas rutinarias a la IA y se enfoca en decisiones 
+        de alto nivel. El hallazgo más llamativo es que valoran mucho <strong>menos las nuevas 
+        tecnologías</strong> (-0.72): paradójicamente, quienes más adoptan IA son los menos motivados 
+        por la novedad tecnológica en sí, lo que sugiere que la usan como <em>herramienta pragmática</em>, 
+        no por fascinación técnica. También valoran menos el mentoring (-0.35) y los mentores expertos 
+        (-0.31), posiblemente porque la IA cumple parcialmente ese rol.
+    </div>
+</section>
+<hr class="section-divider">
+ 
+<!-- P3: Herramientas --> 
+<section id="Herramientas">
+    <div class="section-header">
+        <span class="section-num">P3.</span>
+        <h2>Herramientas y <span>ecosistema</span></h2>
+    </div>
+    <p class="section-question">¿Qué herramientas, frameworks y LLMs específicos están usando los desarrolladores para construir y orquestar AI Agents, y cuáles son los más deseados para los próximos años?</p>
+
+    <div class="tabs">
+        <button class="tab active" onclick="switchTab('models')">LLMs utilizados</button>
+        <button class="tab" onclick="switchTab('orchestration')">Frameworks</button>
+        <button class="tab" onclick="switchTab('external')">Agentes externos</button>
+    </div>
+
+    <div id="tab-models" class="tab-panel active card">
+        <div class="card-title">Modelos de IA más utilizados por desarrolladores</div>
+        <div id="bar-models"></div>
+    </div>
+    <div id="tab-orchestration" class="tab-panel card">
+        <div class="card-title">Frameworks de orquestación de AI Agents</div>
+        <div id="bar-orchestration"></div>
+    </div>
+    <div id="tab-external" class="tab-panel card">
+        <div class="card-title">Agentes y copilots out-of-the-box más usados</div>
+        <div id="bar-external"></div>
+    </div>
+
+    <div class="insight">
+        <strong>Insight:</strong> OpenAI domina en todas las categorías: <strong>ChatGPT</strong> lidera 
+        los agentes externos (6.807 usuarios) y <strong>GPT models</strong> los LLMs (13.424), más del 
+        doble que el segundo, Claude Sonnet (7.063). Destaca la irrupción de <strong>Claude Code</strong> 
+        en 4ª posición de agentes externos (3.398), superando a Microsoft Copilot, lo que refleja el 
+        rápido ascenso de Anthropic en el mercado developer. En orquestación, <strong>Ollama</strong> 
+        sorprende liderando (1.921) por encima de LangChain (1.239) - señal de que los desarrolladores 
+        prefieren soluciones <em>locales y open source</em> para orquestar sus agentes antes que 
+        frameworks cloud. La fragmentación del ecosistema es notable: los 15 frameworks de orquestación 
+        suman menos usuarios que solo ChatGPT.
+    </div>
+</section>
+<hr class="section-divider">
+
+<!-- P4: Salarios -->
+<section id="Salarios">
+    <div class="section-header">
+        <span class="section-num">P4.</span>
+        <h2>Brecha salarial <span>global</span></h2>
+    </div>
+    <p class="section-question">¿Cuál es la brecha salarial entre regiones geográficas una vez normalizado el salario por PPP, y cómo se relaciona con el nivel de adopción de IA y el perfil del desarrollador?</p>
+
+    <div class="card">
+        <div class="card-title">Salario mediano anual en USD - Top 30 países (n ≥ 30 respuestas)</div>
+        <div id="salary-chart"></div>
+    </div>
+
+    <div class="card" style="margin-top:1.5rem">
+        <div class="card-title">Relación entre salario mediano y adopción de AI Agents por país</div>
+        <div id="scatter-salary"></div>
+    </div>
+
+    <div class="insight">
+        <strong>Insight:</strong> El scatterplot revela una <strong>correlación inversa</strong> entre 
+        salario y adopción de AI Agents: países con salarios más bajos muestran mayor adopción. 
+        <strong>Egipto (64.5%)</strong>, <strong>Pakistan (55.2%)</strong> y 
+        <strong>Thailand (53.3%)</strong> lideran la adopción pese a salarios medianos de 14K-40K USD, 
+        mientras que países de alto salario como <strong>EEUU (28.1%)</strong>, 
+        <strong>Suiza (24.7%)</strong> o <strong>Dinamarca (23.1%)</strong> muestran adopciones 
+        moderadas. Una hipótesis plausible: en mercados con salarios bajos, los AI Agents son una 
+        <em>herramienta de productividad y competitividad</em> más que una opción; en mercados de 
+        alto salario, su adopción es más selectiva.
+    </div>
+</section>
+<hr class="section-divider">
+
+<!-- P5: Habilidades --> 
+<section id="Habilidades">
+    <div class="section-header">
+        <span class="section-num">P5.</span>
+        <h2>Habilidades <span>del futuro</span></h2>
+    </div>
+    <p class="section-question">¿Qué habilidades creen los desarrolladores que seguirán siendo valiosas en un mundo con IA avanzada (AIOpen), y difieren estas percepciones entre quienes ya usan AI Agents y quienes no?</p>
+
+    <div class="grid-2">
+        <div class="card">
+        <div class="card-title">Palabras más mencionadas en respuestas abiertas (AIOpen)</div>
+        <svg id="wordcloud"></svg>
+        </div>
+        <div class="card">
+        <div class="card-title">Top 20 términos por frecuencia</div>
+        <div id="bar-words"></div>
+        </div>
+    </div>
+
+    <div class="insight">
+        <strong>Insight:</strong> "Code", "problem solving", "understanding" y "design/architecture" lideran las respuestas abiertas. Contrariamente a la narrativa popular, los desarrolladores consideran que las <em>habilidades técnicas profundas</em>,depuración, diseño de sistemas, arquitectura de software, seguirán siendo más valiosas que las habilidades blandas en un mundo con IA avanzada. "Communication" y "creativity" aparecen, pero en posiciones secundarias.
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <span>Fuente: Stack Overflow Developer Survey 2025 - 49.191 Respuestas - Análisis: Javier Martín Acevedo</span>
+    <span>Visualización de datos - UOC 2026</span>
+</footer>
+
+<!-- App Logic -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
