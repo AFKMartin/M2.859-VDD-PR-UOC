@@ -548,8 +548,99 @@ async function main() {
 
     // P4
     drawSalary(salaryCountry);
-    // Salary Adoption to test.
+    
+    const salaryAdoption = await d3.json(base + "p4_salary_adoption.json");
+        (function() {
+            const el = document.getElementById("scatter-salary");
+            if (!el) return;
+            const W = el.offsetWidth || 700;
+            const H = 420;
+            const margin = { l: 60, r: 140, t: 20, b: 50 };
+            const innerW = W - margin.l - margin.r;
+            const innerH = H - margin.t - margin.b;
 
+            d3.select("#scatter-salary").select("svg").remove();
+            const svg = d3.select("#scatter-salary").append("svg").attr("width", W).attr("height", H);
+            const g = svg.append("g").attr("transform", `translate(${margin.l},${margin.t})`);
+
+            const x = d3.scaleLinear()
+                .domain([0, d3.max(salaryAdoption, d => d.salary_median) * 1.05])
+                .range([0, innerW]);
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(salaryAdoption, d => d.adoption_pct) * 1.1])
+                .range([innerH, 0]);
+            const r = d3.scaleSqrt()
+                .domain([0, d3.max(salaryAdoption, d => d.n)])
+                .range([3, 18]);
+
+            // Línea de tendencia
+            const xMean = d3.mean(salaryAdoption, d => d.salary_median);
+            const yMean = d3.mean(salaryAdoption, d => d.adoption_pct);
+            const slope = d3.sum(salaryAdoption, d => (d.salary_median - xMean) * (d.adoption_pct - yMean)) /
+                        d3.sum(salaryAdoption, d => Math.pow(d.salary_median - xMean, 2));
+            const intercept = yMean - slope * xMean;
+            const x1 = 0, x2 = d3.max(salaryAdoption, d => d.salary_median) * 1.05;
+
+            g.append("line")
+                .attr("x1", x(x1)).attr("y1", y(intercept + slope * x1))
+                .attr("x2", x(x2)).attr("y2", y(intercept + slope * x2))
+                .attr("stroke", "rgba(255,255,255,0.15)")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", "4,4");
+
+            // Ejes
+            g.append("g").attr("transform", `translate(0,${innerH})`)
+                .call(d3.axisBottom(x).ticks(6).tickFormat(d => d/1000 + "K"))
+                .selectAll("text").attr("fill", "rgb(122,122,154)").attr("font-size", "9px");
+            g.append("g")
+                .call(d3.axisLeft(y).ticks(6).tickFormat(d => d + "%"))
+                .selectAll("text").attr("fill", "rgb(122,122,154)").attr("font-size", "9px");
+
+            g.selectAll(".domain, .tick line").attr("stroke", "rgba(255,255,255,0.1)");
+
+            // Labels ejes
+            g.append("text").attr("x", innerW/2).attr("y", innerH + 38)
+                .attr("text-anchor", "middle").attr("fill", "rgb(122,122,154)").attr("font-size", "10px")
+                .text("Salario mediano (USD)");
+            g.append("text").attr("transform", "rotate(-90)")
+                .attr("x", -innerH/2).attr("y", -45)
+                .attr("text-anchor", "middle").attr("fill", "rgb(122,122,154)").attr("font-size", "10px")
+                .text("Adopción AI Agents (%)");
+
+            // Puntos
+            const colorScale = d3.scaleSequential()
+                .domain([0, d3.max(salaryAdoption, d => d.salary_median)])
+                .interpolator(d3.interpolate("rgb(0,229,255)", "rgb(255,107,53)"));
+
+            g.selectAll("circle").data(salaryAdoption).join("circle")
+                .attr("cx", d => x(d.salary_median))
+                .attr("cy", d => y(d.adoption_pct))
+                .attr("r", d => r(d.n))
+                .attr("fill", d => colorScale(d.salary_median))
+                .attr("opacity", 0.75)
+                .attr("stroke", "rgba(255,255,255,0.2)")
+                .attr("stroke-width", 1)
+                .on("mouseover", (e, d) => showTip(
+                    `<b>${d.Country}</b><br>
+                    Salario: <b>${(d.salary_median/1000).toFixed(0)}K USD</b><br>
+                    Adopción: <b>${d.adoption_pct}%</b><br>
+                    Respuestas: <b>${d.n}</b>`,
+                    e))
+                .on("mousemove", moveTip)
+                .on("mouseleave", hideTip);
+
+            // Labels por países destacados
+            const highlight = ["United States of America", "India", "Germany",
+                            "Pakistan", "Egypt", "Switzerland", "Bangladesh"];
+            g.selectAll(".clabel").data(salaryAdoption.filter(d => highlight.includes(d.Country)))
+                .join("text").attr("class", "clabel")
+                .attr("x", d => x(d.salary_median) + r(d.n) + 3)
+                .attr("y", d => y(d.adoption_pct) + 4)
+                .attr("fill", "rgb(192,192,216)").attr("font-size", "9px")
+                .text(d => d.Country.replace("United States of America", "USA")
+                                    .replace("United Kingdom of Great Britain and Northern Ireland", "UK"));
+        })();
+        
     // P5
     drawWordCloud(words);
     hBar("bar-words", words.slice(0, 20).reverse(), "count", "word", COLORS);
