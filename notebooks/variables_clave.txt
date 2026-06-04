@@ -1,0 +1,116 @@
+
+--------------------------------------------------
+AIAgents - nulos: 17272 (35.1%)
+AIAgents
+No, and I don't plan to                                  12082
+No, but I plan to                                         5561
+Yes, I use AI agents at work daily                        4509
+No, I use AI exclusively in copilot/autocomplete mode     4401
+Yes, I use AI agents at work weekly                       2868
+Yes, I use AI agents at work monthly or infrequently      2498
+Name: count, dtype: int64
+
+--------------------------------------------------
+AIAgentChange - nulos: 17513 (35.6%)
+AIAgentChange
+Not at all or minimally                                                        13097
+Yes, somewhat                                                                  11171
+Yes, to a great extent                                                          5178
+No, but my development work has changed somewhat due to non-AI factors          1410
+No, but my development work has significantly changed due to non-AI factors      822
+Name: count, dtype: int64
+
+--------------------------------------------------
+AIThreat - nulos: 13113 (26.7%)
+AIThreat
+No              22958
+I'm not sure     7700
+Yes              5420
+Name: count, dtype: int64
+
+--------------------------------------------------
+NewRole - nulos: 13664 (27.8%)
+NewRole
+I have neither consider or transitioned into a new career or industry          16205
+I have somewhat considered changing my career and/or the industry I work in    10233
+I have strongly considered changing my career and/or the industry I work in     5253
+I have transitioned into a new career and/or industry voluntarily               3111
+I have transitioned into a new career and/or industry involuntarily              725
+Name: count, dtype: int64
+
+--------------------------------------------------
+AISelect - nulos: 15471 (31.5%)
+AISelect
+Yes, I use AI tools daily                      15883
+Yes, I use AI tools weekly                      5958
+No, and I don't plan to                         5454
+Yes, I use AI tools monthly or infrequently     4628
+No, but I plan to soon                          1797
+Name: count, dtype: int64
+
+--------------------------------------------------
+AISent - nulos: 15724 (32.0%)
+AISent
+Favorable           12311
+Very favorable       7677
+Indifferent          5880
+Unfavorable          3621
+Very unfavorable     3219
+Unsure                759
+Name: count, dtype: int64
+
+--------------------------------------------------
+JobSat - nulos: 22521 (45.8%)
+JobSat
+8.0     6972
+7.0     5590
+9.0     3598
+6.0     3230
+10.0    2924
+5.0     1896
+3.0      811
+4.0      803
+2.0      439
+0.0      242
+1.0      165
+Name: count, dtype: int64
+
+--------------------------------------------------
+Country - nulos: 13754 (28.0%)
+Country
+United States of America                                7233
+Germany                                                 3025
+India                                                   2547
+United Kingdom of Great Britain and Northern Ireland    2042
+France                                                  1409
+Canada                                                  1305
+Ukraine                                                  964
+Poland                                                   888
+Netherlands                                              867
+Italy                                                    835
+Brazil                                                   825
+Australia                                                804
+Spain                                                    717
+Sweden                                                   616
+Switzerland                                              546
+Name: count, dtype: int64
+
+--------------------------------------------------
+DevType - nulos: 5511 (11.2%)
+DevType
+Developer, full-stack                            12351
+Developer, back-end                               6453
+Student                                           3008
+Architect, software or solutions                  2684
+Developer, front-end                              1974
+Developer, desktop or enterprise applications     1919
+Other (please specify):                           1825
+Developer, mobile                                 1391
+Developer, embedded applications or devices       1274
+Academic researcher                               1131
+Engineering manager                               1068
+DevOps engineer or professional                   1053
+Data engineer                                      770
+AI/ML engineer                                     677
+Data scientist                                     574
+Name: count, dtype: int64
