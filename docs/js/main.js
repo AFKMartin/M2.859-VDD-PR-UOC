@@ -640,7 +640,7 @@ async function main() {
                 .text(d => d.Country.replace("United States of America", "USA")
                                     .replace("United Kingdom of Great Britain and Northern Ireland", "UK"));
         })();
-    
+
     const salaryGap = await d3.json(base + "p4_salary_gender.json");
         (function() {
             const el = document.getElementById("gender-bars");
@@ -666,8 +666,10 @@ async function main() {
                 .range([0, innerH])
                 .padding(0.2);
 
+            const totalMax = d3.max(salaryGap, d => d.male + d.female);
+            
             const x = d3.scaleLinear()
-                .domain([0, 100])
+                .domain([0, totalMax])
                 .range([0, innerW]);
 
             // Eje Y
@@ -716,8 +718,8 @@ async function main() {
             g.selectAll("rect")
                 .on("mouseover", (e, d) => showTip(
                     `<b>${d.country}</b><br>
-                    Hombres: <b>${d.male}%</b><br>
-                    Mujeres: <b>${d.female}%</b><br>
+                    Hombres: <b>${((d.male / (d.male + d.female)) * 100).toFixed(1)}%</b>
+                    Mujeres: <b>${((d.female / (d.male + d.female)) * 100).toFixed(1)}%</b>
                     Pay Gap: <b>${d.gender_pay_gap}%</b>`,
                     e
                 ))
