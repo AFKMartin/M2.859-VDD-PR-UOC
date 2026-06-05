@@ -1,39 +1,112 @@
-# Enunciado
-# Parte II: proyecto de visualización
+# ¿Están los AI Agents transformando el trabajo del desarrollador?
+## Demo https://afkmartin.github.io/M2.859-VDD-PR-UOC/
 
-En esta segunda parte de la práctica, el estudiante tendrá el reto de desarrollar una visualización de datos que no solo demuestre conocimientos técnicos y teóricos en el campo de la visualización de datos, sino que también integre de manera efectiva las decisiones de diseño necesarias para alcanzar los objetivos planteados. Este proyecto será una oportunidad para consolidar lo aprendido durante la asignatura y poner en práctica habilidades de análisis, diseño y comunicación visual. Este proyecto no solo busca evaluar los conocimientos adquiridos, sino también fomentar la creatividad, la innovación y la capacidad del estudiante para comunicar historias a partir de los datos, utilizando visualizaciones que sean tanto efectivas como impactantes. Os recomendamos que intentéis ir más allá de representar los datos en un dashboard y que la visualización realmente sirva el propósito que describisteis en la primera parte de la práctica.
+---
 
-Así, utilizando el conjunto o conjuntos de datos previamente seleccionados y validados en la primera parte de la práctica, se espera que el estudiante implemente las mejoras sugeridas por el profesor, reforzando la calidad del proyecto.
+## Descripción del proyecto
 
-## Objetivos principales de la práctica:
+Este proyecto es un dashboard interactivo de visualización de datos construido con **D3.js**, cuyo objetivo es analizar cómo los desarrolladores de software están adoptando **AI Agents en 2025**, y cómo esta adopción se relaciona con factores como:
 
-1.- Elección adecuada de herramientas y técnicas: Identificar y utilizar herramientas específicas para la creación de visualizaciones que se alineen con las características del conjunto de datos, el tipo de análisis realizado y los objetivos del proyecto.
+- salario y desigualdad geográfica  
+- satisfacción laboral y percepción de riesgo  
+- herramientas y ecosistema tecnológico  
+- habilidades futuras percibidas  
 
-2.- Creación de un proyecto profesional: Diseñar una visualización que combine estructura, diseño y contenido de calidad profesional, orientada a públicos especializados y no especializados.
+El objetivo no es solo representar datos, sino construir una **historia interactiva basada en datos reales**.
 
-3.- Respuestas a preguntas clave: Formular y responder razonadamente. a preguntas clave relacionadas con los datos, utilizando la visualización como un medio para facilitar la exploración y la comprensión.
+---
 
-4.- Diseño interactivo y comunicativo: Incorporar elementos interactivos que mejoren la experiencia del usuario y favorezcan la comunicación efectiva de los resultados.
-Requisitos adicionales: Además de la visualización, el estudiante deberá presentar un video explicativo que aborde los siguientes aspectos, distribuidos en los porcentajes indicados:
+## Preguntas de investigación
 
-[20%] Proceso de creación: Explicar las etapas del desarrollo, las decisiones de diseño tomadas y los fundamentos detrás de dichas decisiones.
+### P1 - Adopción de AI Agents
+¿En qué medida han adoptado los desarrolladores los AI Agents en 2025 y cómo varía esta adopción por país, experiencia, rol e industria?
 
-[20%] Presentación en vivo: Mostrar las características de la visualización mientras se navega por ella, destacando aspectos clave del diseño y la funcionalidad.
+### P2 - Satisfacción y riesgo laboral
+¿Los desarrolladores que usan AI Agents tienen mayor o menor satisfacción laboral?  
+¿Existe relación con la percepción de amenaza laboral o intención de cambio de carrera?
 
-[15%] Conjunto de datos: Describir brevemente las características más relevantes del conjunto de datos utilizado, su origen y cualquier proceso de preparación realizado.
+### P3 - Herramientas y ecosistema
+¿Qué herramientas, frameworks y modelos LLM utilizan los desarrolladores para construir AI Agents y cuáles desean usar en el futuro?
 
-[20%] Preguntas clave: Detallar las preguntas que la visualización responde y cómo estas se abordan a través del diseño interactivo y analítico.
+### P4 - Salarios y desigualdad
+¿Cómo varía el salario entre países tras normalizarlo por PPP y qué relación tiene con la adopción de IA y el perfil del desarrollador?
 
-[15%] Interactividad: Demostrar los elementos interactivos disponibles, explicando cómo contribuyen a la experiencia del usuario. Incluir reflexiones sobre aspectos de accesibilidad.
+### P5 - Habilidades futuras
+¿Qué habilidades consideran los desarrolladores que serán más importantes en un futuro dominado por la IA, y cómo varía esta percepción entre usuarios y no usuarios?
 
-[10%] Reflexión final: Responder a preguntas como: ¿Qué he aprendido de los datos y de las técnicas empleadas? ¿Qué limitaciones he encontrado? ¿Qué me habría gustado hacer y no pude?
+---
 
-El video deberá tener una duración de entre 4 y 6 minutos. Respetar este rango de tiempo es esencial, ya que se evaluará tanto la capacidad de síntesis como la calidad del guión.
+## Estructura del proyecto
 
-## Publicación y entrega del proyecto:
+- data/stack-overflow-developer-survey-2025: CSV's originales.
 
-La visualización debe estar disponible públicamente en línea y ser accesible sin necesidad de registro. Puedes usar plataformas como GitHub Pages, Surge.sh, o cualquier otro espacio web accesible. Si se utiliza código, este deberá publicarse en un repositorio público, como GitHub o GitLab, y debe incluirse una licencia de código abierto.
+- docs/index.html: Dashboard principal.
 
-Todos los archivos necesarios para ejecutar la visualización en un servidor web local deben estar incluidos.
+- docs/css: stylesheet.
 
-Si se emplean herramientas como Tableau, es posible publicarlo en Tableau Public, o bien en plataformas como Observable, Infogram o Flourish, según sea pertinente.
+- docs/js/main.js: Código hecho en D3.js.
+
+- docs/data: Archivos JSON.
+
+- notebooks: Notebooks en formato jupyter notebook para explorar los CSV's.
+
+- LICENSE: Licencia del proyecto.
+  
+---
+
+## Tecnologías utilizadas
+
+- D3.js (visualización de datos)
+- Python (Exploración de datos)
+- JavaScript (ES6)
+- HTML5 / CSS3
+- GitHub Pages (despliegue)
+
+---
+
+## Características principales
+
+- Gráficos interactivos (scatter plots, barras, distribuciones)
+- Tooltips informativos al pasar el ratón
+- Comparación entre países, roles e industrias
+- Análisis de salarios y adopción de IA
+- Exploración del ecosistema de herramientas LLM
+
+---
+
+## Cómo ejecutar el proyecto
+
+En la carpeta principal, ejecutar el siguiente comando:
+
+```
+cd docs
+python -m http.server 8080 
+```
+
+A continuación abrir el navegador web en el siguiente link:
+
+http://localhost:8080/
+
+---
+
+Sin Python ni instalación ni dependencias adicionales, abrir directamente:
+
+```
+docs/index.html
+```
+
+---
+
+## Fuente de datos
+
+Datos basados en la **Stack Overflow Developer Survey 2025**, procesados y transformados en múltiples archivos JSON para su visualización.
+
+---
+
+## Licencia
+
+[MIT License](https://github.com/AFKMartin/M2.859-VDD-PR-UOC/blob/main/LICENSE)
+
+---
+
+Javier Martín Acevedo
