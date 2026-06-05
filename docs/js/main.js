@@ -640,7 +640,91 @@ async function main() {
                 .text(d => d.Country.replace("United States of America", "USA")
                                     .replace("United Kingdom of Great Britain and Northern Ireland", "UK"));
         })();
-        
+    
+    const salaryGap = await d3.json(base + "p4_salary_gender.json");
+        (function() {
+            const el = document.getElementById("gender-bars");
+            if (!el) return;
+
+            const W = el.offsetWidth || 700;
+            const H = salaryGap.length * 22 + 40;
+            const margin = { l: 120, r: 80, t: 20, b: 20 };
+            const innerW = W - margin.l - margin.r;
+            const innerH = H - margin.t - margin.b;
+
+            d3.select("#gender-bars").select("svg").remove();
+            const svg = d3.select("#gender-bars").append("svg")
+                .attr("width", W)
+                .attr("height", H);
+
+            const g = svg.append("g")
+                .attr("transform", `translate(${margin.l},${margin.t})`);
+
+            // Escalas
+            const y = d3.scaleBand()
+                .domain(salaryGap.map(d => d.country))
+                .range([0, innerH])
+                .padding(0.2);
+
+            const x = d3.scaleLinear()
+                .domain([0, 100])
+                .range([0, innerW]);
+
+            // Eje Y
+            g.append("g")
+                .call(d3.axisLeft(y))
+                .selectAll("text")
+                .attr("fill", "rgb(192,192,216)")
+                .attr("font-size", "10px");
+
+            // Barras male
+            g.selectAll(".male")
+                .data(salaryGap)
+                .join("rect")
+                .attr("class", "male")
+                .attr("x", 0)
+                .attr("y", d => y(d.country))
+                .attr("height", y.bandwidth())
+                .attr("width", d => x(d.male))
+                .attr("fill", "rgb(0, 229, 255)")
+                .attr("opacity", 0.8);
+
+            // Barras female
+            g.selectAll(".female")
+                .data(salaryGap)
+                .join("rect")
+                .attr("class", "female")
+                .attr("x", d => x(d.male))
+                .attr("y", d => y(d.country))
+                .attr("height", y.bandwidth())
+                .attr("width", d => x(d.female))
+                .attr("fill", "rgb(255, 107, 180)")
+                .attr("opacity", 0.8);
+
+            // Texto Pay Gap
+            g.selectAll(".gap")
+                .data(salaryGap)
+                .join("text")
+                .attr("class", "gap")
+                .attr("x", innerW + 6)
+                .attr("y", d => y(d.country) + y.bandwidth() / 2 + 3)
+                .attr("fill", "rgb(192,192,216)")
+                .attr("font-size", "10px")
+                .text(d => `${d.gender_pay_gap}%`);
+
+            // Tooltip
+            g.selectAll("rect")
+                .on("mouseover", (e, d) => showTip(
+                    `<b>${d.country}</b><br>
+                    Hombres: <b>${d.male}%</b><br>
+                    Mujeres: <b>${d.female}%</b><br>
+                    Pay Gap: <b>${d.gender_pay_gap}%</b>`,
+                    e
+                ))
+                .on("mousemove", moveTip)
+                .on("mouseleave", hideTip);
+        })();
+    
     // P5
     drawWordCloud(words);
     hBar("bar-words", words.slice(0, 20).reverse(), "count", "word", COLORS);
